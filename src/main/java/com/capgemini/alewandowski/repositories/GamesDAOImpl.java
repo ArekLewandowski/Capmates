@@ -9,8 +9,7 @@ import com.capgemini.alewandowski.entities.Game;
 import com.capgemini.alewandowski.interfaces.GamesDAO;
 
 @Repository
-public class GamesDAOImpl implements GamesDAO{
-	
+public class GamesDAOImpl implements GamesDAO{	
 	List<Game> listOfGames;
 	
 	public GamesDAOImpl() {
@@ -20,44 +19,37 @@ public class GamesDAOImpl implements GamesDAO{
 
 	@Override
 	public void addToList(Game game) {
-		// TODO Auto-generated method stub
+		listOfGames.add(game);
 		
 	}
 
 	@Override
-	public Game delete(int index) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Game delete(String name) {
-		// TODO Auto-generated method stub
-		return null;
+	public void delete(int index) {
+		listOfGames.remove(index);
 	}
 
 	@Override
 	public List<Game> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return listOfGames;
+	}
+	@Override
+	public List<String> getListOfGames() {
+		List<String> listOfGameNames = new ArrayList<>();
+		for(int i = 0; i<listOfGames.size(); i++){
+			listOfGameNames.add(listOfGames.get(i).getTitle());
+		}
+		return listOfGameNames;
 	}
 
 	@Override
 	public Game getByIndex(int index) {
-		// TODO Auto-generated method stub
-		return null;
+		return listOfGames.get(index);
 	}
 
 	@Override
-	public Game getByName(String name) {
-		// TODO Auto-generated method stub
-		return null;
+	public void editGame(int gameId, Game editedGame) {
+		listOfGames.set(gameId, editedGame);
 	}
 
-	@Override
-	public Game edit(Game item) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }

@@ -2,29 +2,24 @@ package com.capgemini.alewandowski.entities;
 
 import com.capgemini.alewandowski.ENUMS.LEVEL;
 
-public class PlayerGameStats {
-	private Game game;
-	private boolean owner;
+public class UserStats {
+	private int UserId;
 	private int currentLevelPoints;
 	private LEVEL currentLevel;
 	private int won;
 	private int lost;
 	private int draw;
 	//Constructor
-	public PlayerGameStats(Game game, boolean owner) {
+	public UserStats() {
 		super();
-		this.game = game;
-		this.owner = owner;
 	}
-	
-	
 	//Getters and setters
-	public Game getGame() {
-		return game;
+	public int getUserId() {
+		return UserId;
 	}
-	public void setGame(Game game) {
-		this.game = game;
-	}
+	public void setUserId(int userId) {
+		UserId = userId;
+	}	
 	public int getCurrentLevelPoints() {
 		return currentLevelPoints;
 	}
@@ -55,16 +50,4 @@ public class PlayerGameStats {
 	public void setDraw(int draw) {
 		this.draw = draw;
 	}
-
-
-	public boolean isOwner() {
-		return owner;
-	}
-
-
-	public void setOwner(boolean owner) {
-		this.owner = owner;
-	}
-
-	
 }

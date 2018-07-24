@@ -11,16 +11,19 @@ public class User {
 	private String lastName;
 	private String emailAddres;
 	private String password;
-	private int age;
 	private String lifeMotto;
-	private int currentLevelPoints;
-	private LEVEL currentLevel;
-	//List<PlayerGameStats> listOfGames;
-	//List<Aviaibilty> availabilityHours;
-	
+	List<Integer> listOfUserGamesId;
+
 	// Constructors
 	public User(String firstName, String lastName) {
 		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+	}
+	
+	public User(int id, String firstName, String lastName) {
+		super();
+		this.userId = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 	}
@@ -62,41 +65,12 @@ public class User {
 	public void setLifeMotto(String lifeMotto) {
 		this.lifeMotto = lifeMotto;
 	}
-	public int getAge() {
-		return age;
+	public List<Integer> getListOfGames() {
+		return listOfUserGamesId;
 	}
-	public void setAge(int age) {
-		this.age = age;
-	}
-	public int getCurrentLevelPoints() {
-		return currentLevelPoints;
-	}
-	public void setCurrentLevelPoints(int currentLevelPoints) {
-		this.currentLevelPoints = currentLevelPoints;
-	}
-	public LEVEL getCurrentLevel() {
-		return currentLevel;
-	}
-	public void setCurrentLevel(LEVEL currentLevel) {
-		this.currentLevel = currentLevel;
-	}
-//	public List<PlayerGameStats> getListOfGames() {
-//		return listOfGames;
-//	}
-//	public void setListOfGames(List<PlayerGameStats> listOfGames) {
-//		this.listOfGames = listOfGames;
-//	}
-//	public List<Avaibility> getAvailabilityHours() {
-//		return availabilityHours;
-//	}
-//	public void setAvailabilityHours(List<Integer> availabilityHours) {
-//		this.availabilityHours = availabilityHours;
-//	}
-
-
 	
-	
-	
-	
+	public void setListOfGames(List<Integer> listOfGames) {
+		this.listOfUserGamesId = listOfGames;
+	}
 
 }

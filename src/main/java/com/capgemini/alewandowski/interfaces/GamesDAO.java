@@ -7,13 +7,12 @@ import com.capgemini.alewandowski.entities.Game;
 public interface GamesDAO {
 	
 	void addToList(Game game);
-	Game delete(int index);
-	Game delete(String name);
+	void delete(int index);
 	
 	List<Game> getAll();
+	List<String> getListOfGames();
 	Game getByIndex(int index);
-	Game getByName(String name);
 	
-	Game edit(Game item);
+	void editGame(int gameId, Game editedGame);
 
 }

@@ -39,11 +39,13 @@ public class Game{
 		this.minRecuiredForOnePlay = minRecuiedForOnePlay;
 		this.type = gameType;
 	}
-
-
-
-
 	//Getters and Setters
+	public int getGameId() {
+		return gameId;
+	}
+	public void setGameId(int gameId) {
+		this.gameId = gameId;
+	}
 	public String getTitle() {
 		return title;
 	}
@@ -73,18 +75,6 @@ public class Game{
 	}
 	public void setDifficultLevel(DIFFICULTY difficultLevel) {
 		this.difficultLevel = difficultLevel;
-	}
-	public int getMinRecuiedForOnePlay() {
-		return minRecuiredForOnePlay;
-	}
-	public void setMinRecuiedForOnePlay(int minRecuiedForOnePlay) {
-		this.minRecuiredForOnePlay = minRecuiedForOnePlay;
-	}
-	public int getGameId() {
-		return gameId;
-	}
-	public void setGameId(int gameId) {
-		this.gameId = gameId;
 	}
 	public int getMinRecuiredForOnePlay() {
 		return minRecuiredForOnePlay;
