@@ -11,4 +11,5 @@ public interface UserBasicDAO {
 	List<User> getRankingData();//id, firstname, lastname
 	void deleteUser(int id);
 	List<Integer> showListOfUserGames(int id);
+	
 }

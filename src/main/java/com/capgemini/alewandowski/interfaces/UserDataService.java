@@ -1,5 +1,7 @@
 package com.capgemini.alewandowski.interfaces;
 
+import java.util.List;
+
 import com.capgemini.alewandowski.entities.User;
 
 public interface UserDataService {
@@ -15,6 +17,8 @@ public interface UserDataService {
 	void deleteUser(int userId);
 	
 	void viewInforamtion(int userId);
+	
+	List<String> getUsersGameList(int userId);
 	
 
 }

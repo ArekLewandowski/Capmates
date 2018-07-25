@@ -12,52 +12,59 @@ import com.capgemini.alewandowski.interfaces.UserStatsDAO;
 
 @Repository
 public class UserStatsDAOImpl implements UserStatsDAO{
-	List<UserStats> userStats;
+	List<UserStats> userStatsList;
 	
 	public UserStatsDAOImpl() {
 		super();
-		this.userStats = new ArrayList<>();
+		this.userStatsList = new ArrayList<>();
+	}
+	@Override
+	public UserStats addNewUser(UserStats userStats) {
+		userStatsList.add(userStats);
+		return userStats;
+	}
+	@Override
+	public void deleteStatsOfUser(int userid) {
+		userStatsList.remove(userid);		
 	}
 
 	@Override
 	public int checkPoints(int userId) {
-		return userStats.get(userId).getCurrentLevelPoints();
+		int userPoints = userStatsList.get(userId).getCurrentLevelPoints();
+		return userPoints;
 	}
 
 	@Override
 	public LEVEL checkLevel(int userId) {
-		// TODO Auto-generated method stub
-		return null;
+		LEVEL level;
+		int userPoints = userStatsList.get(userId).getCurrentLevelPoints();
+		if (userPoints<20) {
+			level = LEVEL.NOVICE;
+		}else if(userPoints<40) {
+			level = LEVEL.BEGINNER;
+		}else if(userPoints<60){
+			level = LEVEL.INTERMEDIATE;
+		}else if(userPoints<80){
+			level = LEVEL.ADVANCED;
+		}else if(userPoints<100){
+			level = LEVEL.EXPERT;
+		}else{
+			level = LEVEL.WORLDCLASS;
+		}
+		return level;
 	}
-
-	@Override
-	public List<Integer> checkPlayersGames(int userId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
 	@Override
 	public List<User> getRankingData() {
-		// TODO Auto-generated method stub
-		return null;
+		List<User> rankingList;
+		return rankingList;
 	}
 
 	@Override
-	public User addNewUser(UserStats userStats) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void deleteStatsOfUser(int userid) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void savePoints(int userId, int adde) {
-		// TODO Auto-generated method stub
-		
+	public void savePoints(int userId, int addedPoints) {
+		int currentPoints = userStatsList.get(userId).getCurrentLevelPoints();
+		currentPoints += addedPoints;
+		userStatsList.get(userId).setCurrentLevelPoints(currentPoints);
 	}
 
 }

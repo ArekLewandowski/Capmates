@@ -36,11 +36,11 @@ public class UserBasicDAOImpl implements UserBasicDAO{
 
 	@Override
 	public List<User> getRankingData() {
-		List<User> rankingList = new ArrayList<>();
+		List<User> rankingListData = new ArrayList<>();
 		for (User user : this.listOfUserBasicData) {
-			rankingList.add(new User(user.getUserId(), user.getFirstName(), user.getLastName()));	
+			rankingListData.add(new User(user.getUserId(), user.getFirstName(), user.getLastName()));	
 		}
-		return rankingList;
+		return rankingListData;
 	}
 
 	@Override
@@ -53,6 +53,7 @@ public class UserBasicDAOImpl implements UserBasicDAO{
 		List<Integer>listOfGames = listOfUserBasicData.get(id).getListOfGames();
 		return listOfGames;
 	}
+
 
 }
 

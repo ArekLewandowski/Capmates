@@ -1,11 +1,8 @@
 package com.capgemini.alewandowski.entities;
 
-import com.capgemini.alewandowski.ENUMS.LEVEL;
-
 public class UserStats {
 	private int UserId;
 	private int currentLevelPoints;
-	private LEVEL currentLevel;
 	private int won;
 	private int lost;
 	private int draw;
@@ -25,12 +22,6 @@ public class UserStats {
 	}
 	public void setCurrentLevelPoints(int currentLevelPoints) {
 		this.currentLevelPoints = currentLevelPoints;
-	}
-	public LEVEL getCurrentLevel() {
-		return currentLevel;
-	}
-	public void setCurrentLevel(LEVEL currentLevel) {
-		this.currentLevel = currentLevel;
 	}
 	public int getWon() {
 		return won;

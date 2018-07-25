@@ -1,5 +1,8 @@
 package com.capgemini.alewandowski.services;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -7,6 +10,7 @@ import com.capgemini.alewandowski.ENUMS.LEVEL;
 import com.capgemini.alewandowski.entities.User;
 import com.capgemini.alewandowski.entities.UserStats;
 import com.capgemini.alewandowski.interfaces.UserDataService;
+import com.capgemini.alewandowski.repositories.GamesDAOImpl;
 import com.capgemini.alewandowski.repositories.UserBasicDAOImpl;
 import com.capgemini.alewandowski.repositories.UserStatsDAOImpl;
 
@@ -18,6 +22,9 @@ public class UserDataServiceImpl implements UserDataService{
 	
 	@Autowired
 	UserStatsDAOImpl userStatsDAO;
+	
+	@Autowired
+	GamesDAOImpl gamesDAO;
 	
 	private int users;	
 	
@@ -39,7 +46,6 @@ public class UserDataServiceImpl implements UserDataService{
 		UserStats userStats = new UserStats();
 		userStats.setUserId(this.users);
 		userStats.setCurrentLevelPoints(0);
-		userStats.setCurrentLevel(LEVEL.NOVICE);
 		
 		userBasicDAO.addUser(newUser);
 		userStatsDAO.addNewUser(userStats);
@@ -76,6 +82,17 @@ public class UserDataServiceImpl implements UserDataService{
 	public void deleteUser(int userId) {
 		userBasicDAO.deleteUser(userId);
 		userStatsDAO.deleteStatsOfUser(userId);
+	}
+
+	@Override
+	public List<String> getUsersGameList(int userId) {		
+		List<Integer> userGames = userBasicDAO.showListOfUserGames(userId);
+		List<String> userGameList = new ArrayList<>();
+		for (Integer gameId : userGames) {
+			userGameList.add(gamesDAO.getByIndex(gameId).getTitle());
+		}
+		System.out.println(userGameList.toString());
+		return userGameList;
 	}
 	
 }
