@@ -56,7 +56,7 @@ public class UserStatsDAOImpl implements UserStatsDAO{
 	
 	@Override
 	public List<User> getRankingData() {
-		List<User> rankingList;
+		List<User> rankingList = null;
 		return rankingList;
 	}
 

@@ -11,6 +11,7 @@ import com.capgemini.alewandowski.entities.Game;
 import com.capgemini.alewandowski.interfaces.GamesDataService;
 import com.capgemini.alewandowski.repositories.GamesDAOImpl;
 import com.capgemini.alewandowski.repositories.UserBasicDAOImpl;
+import com.capgemini.alewandowski.repositories.UserGamesDAOImpl;
 
 @Service
 public class GamesDataServiceImpl implements GamesDataService {
@@ -21,6 +22,9 @@ public class GamesDataServiceImpl implements GamesDataService {
 
 	@Autowired
 	UserBasicDAOImpl userBasicDAOImpl;
+	
+	@Autowired
+	UserGamesDAOImpl userGamesDAO;
 
 	public GamesDataServiceImpl() {
 		super();
@@ -48,56 +52,7 @@ public class GamesDataServiceImpl implements GamesDataService {
 
 	@Override
 	public void addGame(int userId, int gameId) {
-		userBasicDAOImpl.getUser(userId).getListOfGames().add(gameId);
-	}
-
-	@Override
-	public void editGameTitle(int gameId, String newTitle) {
-		Game editedGame = gamesDAOImpl.getByIndex(gameId);
-		editedGame.setTitle(newTitle);
-		gamesDAOImpl.editGame(gameId, editedGame);
-	}
-
-	@Override
-	public void editGameMinPlayers(int gameId, int minPlayers) {
-		Game editedGame = gamesDAOImpl.getByIndex(gameId);
-		editedGame.setMinPlayers(minPlayers);
-		gamesDAOImpl.editGame(gameId, editedGame);
-	}
-
-	@Override
-	public void editGameMaxPlayers(int gameId, int maxPlayers) {
-		Game editedGame = gamesDAOImpl.getByIndex(gameId);
-		editedGame.setMaxPlayers(maxPlayers);
-		gamesDAOImpl.editGame(gameId, editedGame);
-	}
-
-	@Override
-	public void editGameIsOnePlay(int gameId, boolean isOne) {
-		Game editedGame = gamesDAOImpl.getByIndex(gameId);
-		editedGame.setOnePlayable(isOne);
-		gamesDAOImpl.editGame(gameId, editedGame);
-	}
-
-	@Override
-	public void editGameDifficulty(int gameId, DIFFICULTY difficulty) {
-		Game editedGame = gamesDAOImpl.getByIndex(gameId);
-		editedGame.setDifficultLevel(difficulty);
-		gamesDAOImpl.editGame(gameId, editedGame);
-	}
-
-	@Override
-	public void editGameTime(int gameId, int min) {
-		Game editedGame = gamesDAOImpl.getByIndex(gameId);
-		editedGame.setMinRecuiredForOnePlay(min);
-		gamesDAOImpl.editGame(gameId, editedGame);
-	}
-
-	@Override
-	public void editGameType(int gameId, GAME_TYPE type) {
-		Game editedGame = gamesDAOImpl.getByIndex(gameId);
-		editedGame.setType(type);
-		gamesDAOImpl.editGame(gameId, editedGame);
+		userGamesDAO.addGameToUser(userId, gameId);
 	}
 
 	@Override
@@ -120,6 +75,12 @@ public class GamesDataServiceImpl implements GamesDataService {
 			System.out.println(title);
 		}
 		return listOfGameNames;
+	}
+
+	@Override
+	public void editGame(int gameId, Game editedGame) {
+		gamesDAOImpl.editGame(gameId, editedGame);
+		
 	}
 
 }

@@ -48,13 +48,6 @@ public class UserBasicDAOImpl implements UserBasicDAO{
 		listOfUserBasicData.remove(id);
 	}
 
-	@Override
-	public List<Integer> showListOfUserGames(int id) {
-		List<Integer>listOfGames = listOfUserBasicData.get(id).getListOfGames();
-		return listOfGames;
-	}
-
-
 }
 
 

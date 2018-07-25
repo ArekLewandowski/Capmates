@@ -1,10 +1,5 @@
 package com.capgemini.alewandowski.entities;
 
-import java.util.List;
-
-import com.capgemini.alewandowski.ENUMS.LEVEL;
-
-
 public class User {
 	private int userId;
 	private String firstName;
@@ -12,7 +7,6 @@ public class User {
 	private String emailAddres;
 	private String password;
 	private String lifeMotto;
-	List<Integer> listOfUserGamesId;
 
 	// Constructors
 	public User(String firstName, String lastName) {
@@ -65,12 +59,6 @@ public class User {
 	public void setLifeMotto(String lifeMotto) {
 		this.lifeMotto = lifeMotto;
 	}
-	public List<Integer> getListOfGames() {
-		return listOfUserGamesId;
-	}
-	
-	public void setListOfGames(List<Integer> listOfGames) {
-		this.listOfUserGamesId = listOfGames;
-	}
+
 
 }

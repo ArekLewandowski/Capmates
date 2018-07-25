@@ -10,22 +10,26 @@ import com.capgemini.alewandowski.ENUMS.LEVEL;
 import com.capgemini.alewandowski.entities.User;
 import com.capgemini.alewandowski.entities.UserStats;
 import com.capgemini.alewandowski.interfaces.UserDataService;
+import com.capgemini.alewandowski.interfaces.UserGamesDAO;
 import com.capgemini.alewandowski.repositories.GamesDAOImpl;
 import com.capgemini.alewandowski.repositories.UserBasicDAOImpl;
+import com.capgemini.alewandowski.repositories.UserGamesDAOImpl;
 import com.capgemini.alewandowski.repositories.UserStatsDAOImpl;
 
 @Service
 public class UserDataServiceImpl implements UserDataService{
 
 	@Autowired
-	UserBasicDAOImpl userBasicDAO;
+	private UserBasicDAOImpl userBasicDAO;
 	
 	@Autowired
-	UserStatsDAOImpl userStatsDAO;
+	private UserStatsDAOImpl userStatsDAO;
 	
 	@Autowired
-	GamesDAOImpl gamesDAO;
+	private GamesDAOImpl gamesDAO;
 	
+	@Autowired
+	private UserGamesDAOImpl userGamesDAO;
 	private int users;	
 	
 
@@ -54,18 +58,8 @@ public class UserDataServiceImpl implements UserDataService{
 	}
 
 	@Override
-	public User changeUserData(int userId,
-			String firstName, 
-			String lastName, 
-			String email, 
-			String password, 
-			String lifeMotto) {
-		User editedUser = userBasicDAO.getUser(userId);
-		editedUser.setFirstName(firstName);
-		editedUser.setLastName(lastName);
-		editedUser.setEmailAddres(email);
-		editedUser.setPassword(password);
-		editedUser.setLifeMotto(lifeMotto);
+	public User changeUserData(User user) {
+		User editedUser = userBasicDAO.editUser(user.getUserId(), user);
 		return editedUser;
 	}
 	@Override
@@ -86,7 +80,7 @@ public class UserDataServiceImpl implements UserDataService{
 
 	@Override
 	public List<String> getUsersGameList(int userId) {		
-		List<Integer> userGames = userBasicDAO.showListOfUserGames(userId);
+		List<Integer> userGames = userGamesDAO.getGamesByUserId(userId);
 		List<String> userGameList = new ArrayList<>();
 		for (Integer gameId : userGames) {
 			userGameList.add(gamesDAO.getByIndex(gameId).getTitle());
