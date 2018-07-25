@@ -5,8 +5,9 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import com.capgemini.alewandowski.entities.RankingEntity;
 import com.capgemini.alewandowski.entities.User;
-import com.capgemini.alewandowski.interfaces.UserBasicDAO;
+import com.capgemini.alewandowski.interfacesDAO.UserBasicDAO;
 
 @Repository
 public class UserBasicDAOImpl implements UserBasicDAO{
@@ -35,10 +36,10 @@ public class UserBasicDAOImpl implements UserBasicDAO{
 	}
 
 	@Override
-	public List<User> getRankingData() {
-		List<User> rankingListData = new ArrayList<>();
+	public List<RankingEntity> getRankingData() {
+		List<RankingEntity> rankingListData = new ArrayList<>();
 		for (User user : this.listOfUserBasicData) {
-			rankingListData.add(new User(user.getUserId(), user.getFirstName(), user.getLastName()));	
+			rankingListData.add(new RankingEntity(user.getUserId(), user.getFirstName(), user.getLastName()));	
 		}
 		return rankingListData;
 	}

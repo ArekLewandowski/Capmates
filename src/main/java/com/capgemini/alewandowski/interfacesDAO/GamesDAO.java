@@ -1,4 +1,4 @@
-package com.capgemini.alewandowski.interfaces;
+package com.capgemini.alewandowski.interfacesDAO;
 
 import java.util.List;
 

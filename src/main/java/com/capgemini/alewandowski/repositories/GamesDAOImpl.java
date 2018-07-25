@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.capgemini.alewandowski.entities.Game;
-import com.capgemini.alewandowski.interfaces.GamesDAO;
+import com.capgemini.alewandowski.interfacesDAO.GamesDAO;
 
 @Repository
 public class GamesDAOImpl implements GamesDAO{	

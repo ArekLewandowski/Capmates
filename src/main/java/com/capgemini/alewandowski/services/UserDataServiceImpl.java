@@ -10,7 +10,7 @@ import com.capgemini.alewandowski.ENUMS.LEVEL;
 import com.capgemini.alewandowski.entities.User;
 import com.capgemini.alewandowski.entities.UserStats;
 import com.capgemini.alewandowski.interfaces.UserDataService;
-import com.capgemini.alewandowski.interfaces.UserGamesDAO;
+import com.capgemini.alewandowski.interfacesDAO.UserGamesDAO;
 import com.capgemini.alewandowski.repositories.GamesDAOImpl;
 import com.capgemini.alewandowski.repositories.UserBasicDAOImpl;
 import com.capgemini.alewandowski.repositories.UserGamesDAOImpl;
@@ -52,7 +52,7 @@ public class UserDataServiceImpl implements UserDataService{
 		userStats.setCurrentLevelPoints(0);
 		
 		userBasicDAO.addUser(newUser);
-		userStatsDAO.addNewUser(userStats);
+		userStatsDAO.addNewUserStats(userStats);
 		this.users++;		
 		return newUser;
 	}
