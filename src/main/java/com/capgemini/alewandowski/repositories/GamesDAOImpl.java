@@ -11,16 +11,19 @@ import com.capgemini.alewandowski.interfacesDAO.GamesDAO;
 @Repository
 public class GamesDAOImpl implements GamesDAO{	
 	List<Game> listOfGames;
-	
+	private int games;
 	public GamesDAOImpl() {
 		super();
 		this.listOfGames = new ArrayList<>();
+		games = 0;
 	}
 
 	@Override
 	public void addToList(Game game) {
+		Game addGame = game;
+		addGame.setGameId(games);
 		listOfGames.add(game);
-		
+		games++;
 	}
 
 	@Override

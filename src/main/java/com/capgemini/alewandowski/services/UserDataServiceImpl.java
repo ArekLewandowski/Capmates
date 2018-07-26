@@ -6,64 +6,54 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.capgemini.alewandowski.ENUMS.LEVEL;
+import com.capgemini.alewandowski.Exceptions.NoUserIdInDataBase;
 import com.capgemini.alewandowski.entities.User;
 import com.capgemini.alewandowski.entities.UserStats;
 import com.capgemini.alewandowski.interfaces.UserDataService;
+import com.capgemini.alewandowski.interfacesDAO.GamesDAO;
+import com.capgemini.alewandowski.interfacesDAO.UserBasicDAO;
 import com.capgemini.alewandowski.interfacesDAO.UserGamesDAO;
-import com.capgemini.alewandowski.repositories.GamesDAOImpl;
-import com.capgemini.alewandowski.repositories.UserBasicDAOImpl;
-import com.capgemini.alewandowski.repositories.UserGamesDAOImpl;
-import com.capgemini.alewandowski.repositories.UserStatsDAOImpl;
+import com.capgemini.alewandowski.interfacesDAO.UserStatsDAO;
 
 @Service
 public class UserDataServiceImpl implements UserDataService{
 
 	@Autowired
-	private UserBasicDAOImpl userBasicDAO;
+	private UserBasicDAO userBasicDAO;
 	
 	@Autowired
-	private UserStatsDAOImpl userStatsDAO;
+	private UserStatsDAO userStatsDAO;
 	
 	@Autowired
-	private GamesDAOImpl gamesDAO;
+	private GamesDAO gamesDAO;
 	
 	@Autowired
-	private UserGamesDAOImpl userGamesDAO;
-	private int users;	
+	private UserGamesDAO userGamesDAO;	
 	
 
 	public UserDataServiceImpl() {
 		super();
-		this.users = 0;
 		System.out.println("User service");
 	}
 	
-	public int getUsers() {
-		return users;
-	}
 	
 	@Override
 	public User addNewUser(String firstName, String lastName) {
 		User newUser = new User(firstName, lastName);
-		newUser.setUserId(users);
 		UserStats userStats = new UserStats();
-		userStats.setUserId(this.users);
-		userStats.setCurrentLevelPoints(0);
-		
+		userStats.setCurrentLevelPoints(0);	
 		userBasicDAO.addUser(newUser);
-		userStatsDAO.addNewUserStats(userStats);
-		this.users++;		
+		userStatsDAO.addNewUserStats(userStats);		
 		return newUser;
 	}
 
 	@Override
-	public User changeUserData(User user) {
+	public User changeUserData(User user) throws NoUserIdInDataBase {
 		User editedUser = userBasicDAO.editUser(user.getUserId(), user);
 		return editedUser;
 	}
 	@Override
-	public void viewInforamtion(int userId) {
+	public void viewInforamtion(int userId) throws NoUserIdInDataBase {
 		User user = userBasicDAO.getUser(userId);
 		System.out.println("Id: "+user.getUserId());
 		System.out.println("First Name: "+user.getFirstName());

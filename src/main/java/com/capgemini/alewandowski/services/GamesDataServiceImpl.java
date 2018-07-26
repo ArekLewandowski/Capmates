@@ -9,34 +9,30 @@ import com.capgemini.alewandowski.ENUMS.DIFFICULTY;
 import com.capgemini.alewandowski.ENUMS.GAME_TYPE;
 import com.capgemini.alewandowski.entities.Game;
 import com.capgemini.alewandowski.interfaces.GamesDataService;
-import com.capgemini.alewandowski.repositories.GamesDAOImpl;
-import com.capgemini.alewandowski.repositories.UserBasicDAOImpl;
-import com.capgemini.alewandowski.repositories.UserGamesDAOImpl;
+import com.capgemini.alewandowski.interfacesDAO.GamesDAO;
+import com.capgemini.alewandowski.interfacesDAO.UserBasicDAO;
+import com.capgemini.alewandowski.interfacesDAO.UserGamesDAO;
 
 @Service
 public class GamesDataServiceImpl implements GamesDataService {
-	private int games;
 
 	@Autowired
-	GamesDAOImpl gamesDAOImpl;
+	private GamesDAO gamesDAO;
 
 	@Autowired
-	UserBasicDAOImpl userBasicDAOImpl;
+	private UserBasicDAO userBasicDAO;
 	
 	@Autowired
-	UserGamesDAOImpl userGamesDAO;
+	private UserGamesDAO userGamesDAO;
 
 	public GamesDataServiceImpl() {
 		super();
-		games = 0;
 	}
 
 	@Override
 	public Game createGame(String title, boolean isOnePlayable) {
 		Game game = new Game(title, isOnePlayable);
-		game.setGameId(games);
-		gamesDAOImpl.addToList(game);
-		games++;
+		gamesDAO.addToList(game);
 		return game;
 	}
 
@@ -44,9 +40,7 @@ public class GamesDataServiceImpl implements GamesDataService {
 	public Game createGame(int gameId, String title, int minPlayers, int maxPlayers, boolean isOnePlayable,
 			DIFFICULTY difficultLevel, int minRecuiedForOnePlay, GAME_TYPE type) {
 		Game game = new Game(title, minPlayers, maxPlayers, isOnePlayable, difficultLevel, minRecuiedForOnePlay, type);
-		game.setGameId(games);
-		gamesDAOImpl.addToList(game);
-		games++;
+		gamesDAO.addToList(game);
 		return game;
 	}
 
@@ -57,7 +51,7 @@ public class GamesDataServiceImpl implements GamesDataService {
 
 	@Override
 	public void showDetails(int gameId) {
-		Game editedGame = gamesDAOImpl.getByIndex(gameId);
+		Game editedGame = gamesDAO.getByIndex(gameId);
 		System.out.println("Id: " + editedGame.getGameId());
 		System.out.println("Title: " + editedGame.getTitle());
 		System.out.println("Type: " + editedGame.getType());
@@ -70,7 +64,7 @@ public class GamesDataServiceImpl implements GamesDataService {
 	@Override
 	public List<String> getListOfGames() {
 
-		List<String> listOfGameNames = gamesDAOImpl.getListOfGames();
+		List<String> listOfGameNames = gamesDAO.getListOfGames();
 		for (String title : listOfGameNames) {
 			System.out.println(title);
 		}
@@ -79,7 +73,7 @@ public class GamesDataServiceImpl implements GamesDataService {
 
 	@Override
 	public void editGame(int gameId, Game editedGame) {
-		gamesDAOImpl.editGame(gameId, editedGame);
+		gamesDAO.editGame(gameId, editedGame);
 		
 	}
 
