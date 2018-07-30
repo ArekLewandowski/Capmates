@@ -9,6 +9,10 @@ public class User {
 	private String lifeMotto;
 
 	// Constructors
+	public User() {
+		super();
+	}
+	
 	public User(String firstName, String lastName) {
 		super();
 		this.firstName = firstName;
@@ -22,6 +26,18 @@ public class User {
 		this.lastName = lastName;
 	}
 	
+	
+	
+	public User(int userId, String firstName, String lastName, String emailAddres, String password, String lifeMotto) {
+		super();
+		this.userId = userId;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.emailAddres = emailAddres;
+		this.password = password;
+		this.lifeMotto = lifeMotto;
+	}
+
 	//Getters and Setters
 	public int getUserId() {
 		return userId;

@@ -6,7 +6,7 @@ import com.capgemini.alewandowski.Exceptions.NoUserIdInDataBase;
 import com.capgemini.alewandowski.entities.User;
 
 public interface UserDataService {
-	User addNewUser(String firstName, String lastName);
+	User addNewUser(User user);
 	
 	List<User> getUsers();
 	

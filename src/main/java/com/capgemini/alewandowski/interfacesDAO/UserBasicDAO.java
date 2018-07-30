@@ -7,15 +7,20 @@ import com.capgemini.alewandowski.entities.RankingEntity;
 import com.capgemini.alewandowski.entities.User;
 
 public interface UserBasicDAO {
+	
 	User addUser(User user);
+	
 	List<User> getUsers();
+	
 	User getUser(int id) throws NoUserIdInDataBase;
-//	List<User> getUserByFirstName(String fistName);
-//	List<User> getUserByLastName(String lastName);
-//	List<User> getUserByEmail(String email);
+	
 	User getUserByListId(int listId);
+	
 	List<User> search(String firstName, String lastName, String email);
+	
 	User editUser(int id, User editedUser) throws NoUserIdInDataBase;
+	
 	List<RankingEntity> getRankingData();//id, firstname, lastname
+	
 	void deleteUser(int id);	
 }

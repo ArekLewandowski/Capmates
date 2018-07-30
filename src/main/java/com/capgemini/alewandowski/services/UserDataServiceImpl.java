@@ -38,8 +38,13 @@ public class UserDataServiceImpl implements UserDataService{
 	
 	
 	@Override
-	public User addNewUser(String firstName, String lastName) {
-		User newUser = new User(firstName, lastName);
+	public User addNewUser(User user) {
+		User newUser = new User();
+		newUser.setFirstName(user.getFirstName());
+		newUser.setLastName(user.getLastName());
+		newUser.setEmailAddres(user.getEmailAddres());
+		newUser.setPassword(user.getPassword());
+		newUser.setLifeMotto(user.getLifeMotto());
 		UserStats userStats = new UserStats();
 		userStats.setCurrentLevelPoints(0);	
 		userBasicDAO.addUser(newUser);

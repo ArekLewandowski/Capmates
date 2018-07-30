@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -35,8 +36,8 @@ public class Controller {
 		return uDataService.deleteUser(id);
 	}
 	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	private User addNewUser(User user){
-		uDataService.addNewUser(user.getFirstName(), user.getLastName());
+	private User addNewUser(@RequestBody User user){
+		uDataService.addNewUser(user);
 		return user;
 	}
 }

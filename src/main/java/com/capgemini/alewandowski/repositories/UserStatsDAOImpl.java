@@ -13,6 +13,7 @@ import com.capgemini.alewandowski.interfacesDAO.UserStatsDAO;
 
 @Repository
 public class UserStatsDAOImpl implements UserStatsDAO{
+	
 	List<UserStats> userStatsList;
 	private int users;
 	

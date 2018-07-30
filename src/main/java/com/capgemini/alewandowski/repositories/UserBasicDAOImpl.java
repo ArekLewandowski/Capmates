@@ -24,9 +24,13 @@ public class UserBasicDAOImpl implements UserBasicDAO {
 		listOfUserBasicData.get(1).setUserId(1);
 		listOfUserBasicData.add(new User("John", "Doe"));
 		listOfUserBasicData.get(2).setUserId(2);
-		listOfUserBasicData.add(new User("Bruce", "Le"));
+		listOfUserBasicData.add(new User("Arek", "Leo"));
 		listOfUserBasicData.get(3).setUserId(3);
-		users = 4;
+		listOfUserBasicData.get(3).setEmailAddres("cos@cos.pl");		
+		listOfUserBasicData.add(new User("Arek", "Leo"));
+		listOfUserBasicData.get(4).setUserId(4);
+		listOfUserBasicData.get(4).setEmailAddres("cosInnego@cos.pl");		
+		users = 5;
 	}
 
 	@Override
@@ -93,7 +97,7 @@ public class UserBasicDAOImpl implements UserBasicDAO {
 		for (User user : listOfUserBasicData) {
 			if ((firstName==null || user.getFirstName().equals(firstName)) &&
 					(lastName==null || user.getLastName().equals(lastName)) && 
-					(email==null || user.getEmailAddres().equals(email))) {
+					(email==null || email.equals(user.getEmailAddres()))) {
 				searchedUsers.add(user);
 			}
 		}
@@ -101,36 +105,3 @@ public class UserBasicDAOImpl implements UserBasicDAO {
 	}
 
 }
-
-//	@Override
-//	public List<User> getUserByFirstName(String fistName) {
-//		List<User> userListByFirstName = new ArrayList<>();
-//		for (User user : listOfUserBasicData) {
-//			if(user.getFirstName().equals(fistName)){
-//				userListByFirstName.add(user);
-//			}
-//		}
-//		return userListByFirstName;
-//	}
-//
-//	@Override
-//	public List<User> getUserByLastName(String lastName) {
-//		List<User> userListByLastName = new ArrayList<>();
-//		for (User user : listOfUserBasicData) {
-//			if(user.getFirstName().equals(lastName)){
-//				userListByLastName.add(user);
-//			}
-//		}
-//		return userListByLastName;
-//	}
-//
-//	@Override
-//	public List<User> getUserByEmail(String email) {
-//			List<User> userListByLastName = new ArrayList<>();
-//			for (User user : listOfUserBasicData) {
-//				if(user.getFirstName().equals(email)){
-//					userListByLastName.add(user);
-//				}
-//			}
-//		return getUserByEmail(email);
-//	}
