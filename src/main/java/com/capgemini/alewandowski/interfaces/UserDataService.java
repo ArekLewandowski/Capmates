@@ -8,11 +8,15 @@ import com.capgemini.alewandowski.entities.User;
 public interface UserDataService {
 	User addNewUser(String firstName, String lastName);
 	
+	List<User> getUsers();
+	
+	List<User> searchUsers(String firstName, String lastName, String email) throws NoUserIdInDataBase;
+	
 	User changeUserData(User user) throws NoUserIdInDataBase;
 	
-	void deleteUser(int userId);
+	User deleteUser(int userId) throws NoUserIdInDataBase;
 	
-	void viewInforamtion(int userId) throws NoUserIdInDataBase;
+	User viewInforamtion(int userId) throws NoUserIdInDataBase;
 	
 	List<String> getUsersGameList(int userId);
 	

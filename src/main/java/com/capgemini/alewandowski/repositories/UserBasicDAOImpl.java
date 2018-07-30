@@ -2,7 +2,6 @@ package com.capgemini.alewandowski.repositories;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
 import org.springframework.stereotype.Repository;
 
@@ -12,14 +11,22 @@ import com.capgemini.alewandowski.entities.User;
 import com.capgemini.alewandowski.interfacesDAO.UserBasicDAO;
 
 @Repository
-public class UserBasicDAOImpl implements UserBasicDAO{
+public class UserBasicDAOImpl implements UserBasicDAO {
 	List<User> listOfUserBasicData;
 	int users;
-	
+
 	public UserBasicDAOImpl() {
 		super();
 		this.listOfUserBasicData = new ArrayList<>();
-		users = 0;
+		listOfUserBasicData.add(new User("Arek", "Le"));
+		listOfUserBasicData.get(0).setUserId(0);
+		listOfUserBasicData.add(new User("Madzia", "Fra"));
+		listOfUserBasicData.get(1).setUserId(1);
+		listOfUserBasicData.add(new User("John", "Doe"));
+		listOfUserBasicData.get(2).setUserId(2);
+		listOfUserBasicData.add(new User("Bruce", "Le"));
+		listOfUserBasicData.get(3).setUserId(3);
+		users = 4;
 	}
 
 	@Override
@@ -32,24 +39,29 @@ public class UserBasicDAOImpl implements UserBasicDAO{
 
 	@Override
 	public User getUser(int id) throws NoUserIdInDataBase {
-			User gettedUser = getListIdByUserId(id);
-			return gettedUser;
+		User gettedUser = getListIdByUserId(id);
+		return gettedUser;
+	}
+
+	@Override
+	public List<User> getUsers() {
+		return listOfUserBasicData;
 	}
 
 	@Override
 	public User editUser(int id, User editedUser) throws NoUserIdInDataBase {
-			User editUser = getListIdByUserId(id);
-			listOfUserBasicData.indexOf(editUser);
-			editedUser.setUserId(id);
-			listOfUserBasicData.set(id, editedUser);
-			return editUser;
+		User editUser = getListIdByUserId(id);
+		listOfUserBasicData.indexOf(editUser);
+		editedUser.setUserId(id);
+		listOfUserBasicData.set(id, editedUser);
+		return editUser;
 	}
 
 	@Override
 	public List<RankingEntity> getRankingData() {
 		List<RankingEntity> rankingListData = new ArrayList<>();
 		for (User user : this.listOfUserBasicData) {
-			rankingListData.add(new RankingEntity(user.getUserId(), user.getFirstName(), user.getLastName()));	
+			rankingListData.add(new RankingEntity(user.getUserId(), user.getFirstName(), user.getLastName()));
 		}
 		return rankingListData;
 	}
@@ -58,31 +70,67 @@ public class UserBasicDAOImpl implements UserBasicDAO{
 	public void deleteUser(int id) {
 		listOfUserBasicData.remove(id);
 	}
+
 	@Override
-	public User getUserByListId(int listId) {	
+	public User getUserByListId(int listId) {
 		return listOfUserBasicData.get(listId);
 	}
-	
-	private User getListIdByUserId(int userId) throws NoUserIdInDataBase{
-		User user = listOfUserBasicData.stream().filter(x->x.getUserId()==userId).findFirst().get();
-		if(user!=null){
+
+
+	// private
+	private User getListIdByUserId(int userId) throws NoUserIdInDataBase {
+		User user = listOfUserBasicData.stream().filter(x -> x.getUserId() == userId).findFirst().get();
+		if (user != null) {
 			return user;
-		}else{
-		throw new NoUserIdInDataBase();
+		} else {
+			throw new NoUserIdInDataBase();
 		}
 	}
 
+	@Override
+	public List<User> search(String firstName, String lastName, String email) {
+		List<User> searchedUsers = new ArrayList<>();
+		for (User user : listOfUserBasicData) {
+			if ((firstName==null || user.getFirstName().equals(firstName)) &&
+					(lastName==null || user.getLastName().equals(lastName)) && 
+					(email==null || user.getEmailAddres().equals(email))) {
+				searchedUsers.add(user);
+			}
+		}
+		return searchedUsers;
+	}
 
 }
 
-
-
-
-
-
-
-
-
-
-
-
+//	@Override
+//	public List<User> getUserByFirstName(String fistName) {
+//		List<User> userListByFirstName = new ArrayList<>();
+//		for (User user : listOfUserBasicData) {
+//			if(user.getFirstName().equals(fistName)){
+//				userListByFirstName.add(user);
+//			}
+//		}
+//		return userListByFirstName;
+//	}
+//
+//	@Override
+//	public List<User> getUserByLastName(String lastName) {
+//		List<User> userListByLastName = new ArrayList<>();
+//		for (User user : listOfUserBasicData) {
+//			if(user.getFirstName().equals(lastName)){
+//				userListByLastName.add(user);
+//			}
+//		}
+//		return userListByLastName;
+//	}
+//
+//	@Override
+//	public List<User> getUserByEmail(String email) {
+//			List<User> userListByLastName = new ArrayList<>();
+//			for (User user : listOfUserBasicData) {
+//				if(user.getFirstName().equals(email)){
+//					userListByLastName.add(user);
+//				}
+//			}
+//		return getUserByEmail(email);
+//	}

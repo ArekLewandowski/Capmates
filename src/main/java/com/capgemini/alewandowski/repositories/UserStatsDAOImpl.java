@@ -14,14 +14,28 @@ import com.capgemini.alewandowski.interfacesDAO.UserStatsDAO;
 @Repository
 public class UserStatsDAOImpl implements UserStatsDAO{
 	List<UserStats> userStatsList;
+	private int users;
 	
 	public UserStatsDAOImpl() {
 		super();
 		this.userStatsList = new ArrayList<>();
+		userStatsList.add(new UserStats());
+		userStatsList.get(0).setUserId(0);
+		userStatsList.add(new UserStats());
+		userStatsList.get(1).setUserId(1);
+		userStatsList.add(new UserStats());
+		userStatsList.get(2).setUserId(2);
+		userStatsList.add(new UserStats());
+		userStatsList.get(3).setUserId(3);
+		
+		users = 4;
 	}
 	@Override
 	public UserStats addNewUserStats(UserStats userStats) {
+		UserStats uStats = userStats;
+		uStats.setUserId(users);
 		userStatsList.add(userStats);
+		users++;
 		return userStats;
 	}
 	@Override

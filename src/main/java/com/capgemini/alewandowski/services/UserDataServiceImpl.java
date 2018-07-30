@@ -53,21 +53,37 @@ public class UserDataServiceImpl implements UserDataService{
 		return editedUser;
 	}
 	@Override
-	public void viewInforamtion(int userId) throws NoUserIdInDataBase {
+	public User viewInforamtion(int userId) throws NoUserIdInDataBase {
 		User user = userBasicDAO.getUser(userId);
 		System.out.println("Id: "+user.getUserId());
 		System.out.println("First Name: "+user.getFirstName());
 		System.out.println("Last Name: "+user.getLastName());
 		System.out.println("Email: "+user.getEmailAddres());
 		System.out.println("Life motto: "+user.getLifeMotto());
+		return user;
 	}
 
 	@Override
-	public void deleteUser(int userId) {
+	public User deleteUser(int userId) throws NoUserIdInDataBase {
+		User deletedUser = userBasicDAO.getUser(userId);
 		userBasicDAO.deleteUser(userId);
 		userStatsDAO.deleteStatsOfUser(userId);
+		return deletedUser;
 	}
 
+	@Override
+	public List<User> getUsers() {
+		return userBasicDAO.getUsers();
+	}
+	
+	@Override
+	public List<User> searchUsers(String firstName, String lastName, String email) throws NoUserIdInDataBase {
+		
+		List<User> comboList = userBasicDAO.search(firstName, lastName, email);
+		return comboList;
+	}
+	
+		
 	@Override
 	public List<String> getUsersGameList(int userId) {		
 		List<Integer> userGames = userGamesDAO.getGamesByUserId(userId);
@@ -78,5 +94,7 @@ public class UserDataServiceImpl implements UserDataService{
 		System.out.println(userGameList.toString());
 		return userGameList;
 	}
-	
+
+
+
 }
