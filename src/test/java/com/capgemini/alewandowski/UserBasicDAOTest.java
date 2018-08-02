@@ -19,12 +19,8 @@ public class UserBasicDAOTest {
 		UserBasicDAO userBasicDAO = new UserBasicDAOImpl();
 		
 		//when
-		userBasicDAO.addUser(new User("Tom","No"));
-		userBasicDAO.addUser(new User("Jan", "Ko"));
-		userBasicDAO.addUser(new User("John", "Doe"));
-		userBasicDAO.addUser(new User("Ed", "Bo"));
-//		userBasicDAO.editUser(0, new User("Arek", "Le"));
-//		userBasicDAO.deleteUser(1);
+		
+		userBasicDAO.deleteUser(1);
 		//then
 		assertEquals(4, userBasicDAO.getRankingData().size());
 	}
@@ -34,14 +30,11 @@ public class UserBasicDAOTest {
 			UserBasicDAO userBasicDAO = new UserBasicDAOImpl();
 			
 			//when
-			userBasicDAO.addUser(new User("Tom","No"));
-			userBasicDAO.addUser(new User("Jan", "Ko"));
-			userBasicDAO.addUser(new User("John", "Doe"));
-			userBasicDAO.addUser(new User("Ed", "Bo"));
-//			userBasicDAO.editUser(0, new User("Arek", "Le"));
+
+			userBasicDAO.editUser(0, new User("Arek", "Le"));
 			userBasicDAO.deleteUser(1);
 			//then
-			assertEquals(3, userBasicDAO.getRankingData().size());
+			assertEquals(4, userBasicDAO.getRankingData().size());
 		}
 		@Test
 		public void shouldEditUserFromList() throws NoUserIdInDataBase{
