@@ -33,11 +33,11 @@ public class UserDataServiceTest {
 			
 		//given
 		UserDataService userDataService = new UserDataServiceImpl();
-		userDataService.addNewUser("Arek", "Le");
-		userDataService.addNewUser("Piotr", "La");
-		userDataService.addNewUser("John", "Lwe");
-		userDataService.addNewUser("Bob", "Ler");
-		userDataService.addNewUser("Ed", "Let");
+		userDataService.addNewUser(new User("Arek", "L"));
+		userDataService.addNewUser(new User("Piotr", "La"));
+		userDataService.addNewUser(new User("John", "Lwe"));
+		userDataService.addNewUser(new User("Bob", "Ler"));
+		userDataService.addNewUser(new User("Ed", "Let"));
 		//when
 		userDataService.viewInforamtion(1);
 		
