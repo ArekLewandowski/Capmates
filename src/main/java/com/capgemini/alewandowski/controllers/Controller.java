@@ -17,26 +17,27 @@ import com.capgemini.alewandowski.interfaces.UserDataService;
 @RestController
 @RequestMapping("/users")
 public class Controller {
-	
+
 	@Autowired
 	private UserDataService uDataService;
-	
+
 	@RequestMapping(method = RequestMethod.GET)
-	public List<User> getUsersData(){
+	public List<User> getUsersData() {
 		return uDataService.getUsers();
 	}
-	
-	@RequestMapping(value="/{id}", method = RequestMethod.GET)
-	public User getUsersData(@PathVariable("id") int id) throws NoUserIdInDataBase{
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public User getUsersData(@PathVariable("id") int id) throws NoUserIdInDataBase {
 		return uDataService.viewInforamtion(id);
 	}
-	
-	@RequestMapping(value="/{id}", method = RequestMethod.DELETE)
-	public User deleteUsersData(@PathVariable("id") int id) throws NoUserIdInDataBase{
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	public User deleteUsersData(@PathVariable("id") int id) throws NoUserIdInDataBase {
 		return uDataService.deleteUser(id);
 	}
+
 	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	private User addNewUser(@RequestBody User user){
+	private User addNewUser(@RequestBody User user) {
 		uDataService.addNewUser(user);
 		return user;
 	}

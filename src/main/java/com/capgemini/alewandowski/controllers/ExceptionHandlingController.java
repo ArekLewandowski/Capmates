@@ -12,20 +12,22 @@ import com.capgemini.alewandowski.Exceptions.NoUserIdInDataBase;
 
 @ControllerAdvice
 public class ExceptionHandlingController {
-	
+
 	@ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "Empty list exception") // 404
 	@ExceptionHandler(EmptyListException.class)
 	public void empty() {
 
 	}
+
 	@ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "Empty list exception") // 404
 	@ExceptionHandler(NoUserIdInDataBase.class)
 	public void noUser() {
 
 	}
+
 	@ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "Empty list exception") // 404
 	@ExceptionHandler(NoSuchElementException.class)
 	public void noElement() {
 	}
-	
+
 }

@@ -24,32 +24,34 @@ public class SearchController {
 
 	@Autowired
 	private UserDataService uDataService;
-	
+
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
-    @ResponseBody
-    public List<User> queryStringMapping(
-            @RequestParam(required = false) String firstName, 
-            @RequestParam(required = false) String lastName,
-            @RequestParam(required = false) String email) throws NoUserIdInDataBase {
+	@ResponseBody
+	public List<User> queryStringMapping(
+			@RequestParam(required = false) String firstName,
+			@RequestParam(required = false) String lastName,
+			@RequestParam(required = false) String email)throws NoUserIdInDataBase {
+		
 		Map<String, String> filters = new TreeMap<>();
 		filters.put("firstName", firstName);
 		filters.put("lastName", lastName);
 		filters.put("email", email);
-		List<User> searchedUsers = uDataService.searchUsers(filters.get("firstName"), filters.get("lastName"), filters.get("email"));
-        if (searchedUsers.isEmpty()) {
-        	throw new OrderNotFoundException();
+		
+		List<User> searchedUsers = uDataService.searchUsers(filters.get("firstName"), filters.get("lastName"),
+				filters.get("email"));
+		
+		if (searchedUsers.isEmpty()) {
+			throw new OrderNotFoundException();
 
 		}
-		return searchedUsers;       
+		return searchedUsers;
 	}
 
-	 @SuppressWarnings("serial")
-	@ResponseStatus(value=HttpStatus.NOT_FOUND, reason="No such Order")  // 404
-	 public class OrderNotFoundException extends RuntimeException {
-		/**
-		 * 
-		 */
+	@SuppressWarnings("serial")
+	@ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "No such Order") // 404
+	public class OrderNotFoundException extends RuntimeException {
+	
 		private static final long serialVersionUID = 6262303058917554892L;
-	     
-	 }
+
+	}
 }
